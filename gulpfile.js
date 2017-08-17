@@ -7,7 +7,8 @@ var gulp = require("gulp"),
   browserify = require("browserify"),
   watchify = require("watchify"),
   bs = require("browser-sync").create(),
-  fs = require("fs");
+  fs = require("fs"),
+  sourcemaps = require("gulp-sourcemaps");
 
 const SOURCE = "src/",
   TEMP = "temp/",
@@ -18,12 +19,14 @@ const SOURCE = "src/",
 gulp.task("transpile", function(){
   return gulp.src(SOURCE + JS + "**/*.js")
     .pipe(gcached(TEMP + JS))
+    .pipe(sourcemaps.init())
     .pipe(babel())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(TEMP + JS));
 });
 
 gulp.task("bundle", ["transpile"], function(done){
-  watchify(browserify(TEMP + JS + "main.js"))
+  watchify(browserify(TEMP + JS + "main.js", {debug: true}))
     .on("error", gutil.log)
     .bundle()
     .pipe(fs.createWriteStream(DIST + JS + "bundle.js"))
