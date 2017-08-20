@@ -2,8 +2,8 @@
 
 import { ADD_QUESTION } from "./Types.js";
 
-export function addQuestion(){
+export const addQuestion = function (){
   return {
     type: ADD_QUESTION
   };
-}
+};

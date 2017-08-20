@@ -14,14 +14,18 @@ function* questionGenerator(){
     };
   }
 }
+const qGenerator = questionGenerator();
 
-export function reduce(state = initialState, action){
+export const reduce = function (state = initialState, action){
   let question = undefined;
   switch (action.type) {
     case ADD_QUESTION:
-      question = questionGenerator();
-      return state.questions.set(question.id, question);
+      question = qGenerator.next().value;
+      console.log(question);
+      return {
+        questions: state.questions.set(question.id, question)
+      };
     default:
       return state;
   }
-}
+};

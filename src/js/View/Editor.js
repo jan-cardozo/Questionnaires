@@ -1,12 +1,11 @@
 "use strict";
 
 import * as React from "react";
-import * as Question from "./Question.js";
+import { Question } from "./Question.js";
 
 export class Editor extends React.Component {
   constructor(props){
     super(props);
-    console.log(props);
     this.props = props;
   }
 
@@ -21,8 +20,8 @@ export class Editor extends React.Component {
         </div>
       </div>
       <div className="col-xs-7">
-        {this.props.questions.map(() => {
-          return <Question />;
+        {this.props.questions.map((question) => {
+          return <Question key={question.id} />;
         })}
       </div>
     </div>);

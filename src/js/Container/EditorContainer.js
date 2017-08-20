@@ -2,7 +2,7 @@
 
 import { addQuestion } from "../Action/Creator.js";
 import { connect } from "react-redux";
-import { Editor } from "../View/Editor.js";
+import { Editor } from "../view/Editor.js";
 
 const mapStateToProps = state => {
   return {
@@ -13,14 +13,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onButtonClick: () => {
-      dispatch(addQuestion()); 
+      dispatch(addQuestion());
     }
   };
 };
 
-const EditorContainer = connect(
+export const EditorContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Editor);
-
-export default EditorContainer;
